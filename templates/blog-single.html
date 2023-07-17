@@ -9,13 +9,12 @@
             <div class="col-ms-12">
                 <div class="card p-3">
                     <div class="d-flex flex-row mb-3">
-                        <img src="{% static 'img/blog/blog-1.jpg' %}" width="100%">
+                        <img src="{{blog.image}}" width="100%">
                     </div>
-                    <h6>Get more context on your users with stripe data inside our platform.</h6>
+                    <h6>{{blog.title}}</h6>
                     <div class="d-flex justify-content-between install mt-3">
-                        <button class="btn btn-primary">
-                            This is my blogs description
-                        </button>
+                        <p> {{blog.description}}
+                        </p>
                     </div>
                 </div>
             </div>

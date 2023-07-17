@@ -29,8 +29,19 @@
             <nav id="navbar" class="navbar">
                <ul>
                   <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
+                  
+                  {% if user.is_authenticated %}
+                  
+                     {% if request.user.is_superuser %}
+                     <li><a class="nav-link scrollto" href="{% url 'add_your_blog' %}">Create Blog</a></li>
+                     {% endif %}
+                     <li><a class="nav-link scrollto" href="{% url 'user_logout' %}">Logout</a></li>
+                  {% else %}
                   <li><a class="nav-link scrollto" href="{% url 'user_register' %}">Register</a></li>
-                  <li><a class="nav-link scrollto" href="{% url 'user_login' %}">Login</a></li>
+                     <li><a class="nav-link scrollto" href="{% url 'user_login' %}">Login</a></li>
+                  {% endif %}
+
+
                   <li><a class="nav-link scrollto" href="{% url 'my_blogs' %}">Blogs</a></li>
                   <li><a class="nav-link scrollto" href="{% url 'my_contact' %}">Contact</a></li>
                </ul>
