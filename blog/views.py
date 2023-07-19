@@ -4,7 +4,7 @@ from blog.models import Profile, Blog, User
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from blog.helper import save_file
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -65,12 +65,19 @@ def register(request):
 
 def about(request):
     return render(request,"about.html")
+
+
 def contact(request):
     return render(request,"contact.html")
+
+
 def blogs(request):
     blogs = Blog.objects.all().order_by("-created_at")
-    context = {"blogs" : blogs}
-
+    per_page = request.GET.get("per_page", 2)
+    page_number = request.GET.get("page", 1)
+    paginator = Paginator(blogs, per_page)
+    blogs_with_pagination = paginator.get_page(page_number)    
+    context = {"blogs_with_pagination": blogs_with_pagination}
     return render(request,"blog.html",context)
 
 
